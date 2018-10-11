@@ -2,3 +2,5 @@ node_modules
 .DS_Store
 screenshotsFolder
 videosFolder
+cypress/screenshots/
+cypress/videos/

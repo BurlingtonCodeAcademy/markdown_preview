@@ -1,13 +1,10 @@
 describe('Cypress', function () {
-  it('successfully loads and asserts', function () {
-    expect(true).to.equal(true);
-  });
   it('successfully visits the home page', function () {
     cy.visit('/');
   });
 });
 
-describe('The Page', function () {
+describe('Page Elements', function () {
   before(function () {
     cy.visit('/');
   });
@@ -40,7 +37,7 @@ describe('The Render button', function () {
     cy.get('button').click();
     cy.get('div#preview').should('be.visible');
     cy.get('div#preview').then((el) => {
-      assert.include(el.text(), 'Hello');
+      assert.include(el.text().trim(), 'Hello');
     });
     console.log(cy.get('div#preview'));
   });
@@ -57,16 +54,22 @@ describe('The Render button', function () {
 });
 
 describe('Automatic Rendering', function() {
-  it('happens eventually', function() {
+  
+  beforeEach(()=>{
     cy.get('textarea#source').clear();
-
     cy.get('div#preview').invoke('empty'); // https://api.jquery.com/empty/
+  });
+
+  it('happens eventually', function() {
+    
+    // would be this if synchronous:
+    // cy.get('div#preview h1').should.not.have.text('Hello');
+    // but it's really this:
     cy.get('div#preview h1').should('not.have.text', 'Hello');
 
     cy.get('textarea#source').type('# Hello\n* bullet');
-    cy.get('div#preview').within(($div) => {
-      cy.get('div#preview h1').should('have.text', 'Hello');
-      cy.get('div#preview li').should('have.text', 'bullet');
-    });
+
+    cy.get('div#preview h1').should('have.text', 'Hello');
+    cy.get('div#preview li').should('have.text', 'bullet');
   });
 });

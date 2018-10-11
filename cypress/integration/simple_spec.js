@@ -7,14 +7,15 @@ describe('Cypress', function () {
   });
 });
 
-
 describe('The Page', function () {
   before(function () {
     cy.visit('/');
   });
 
   it('has a headline', function () {
-    cy.get('h1').should('be.visible').should('have.text', 'Markdown Preview')
+    cy.get('h1')
+      .should('be.visible')
+      .should('have.text', 'Markdown Preview')
   });
 
   it('has a source text field', function () {
@@ -32,7 +33,6 @@ describe('The Page', function () {
 
 describe('The Render button', function () {
   it('converts markdown to some kind of text', function () {
-    console.log("YO")
     cy.get('textarea#source').type('# Hello');
     cy.get('button').click();
     cy.get('div#preview').should('be.visible');

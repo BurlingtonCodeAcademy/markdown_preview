@@ -4,17 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npx static .",
+    "start": "serve ./public/ --listen 8080",
     "test": "cypress run"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^3.1.5"
-  },
-  "dependencies": {
-    "marked": "^0.3.19",
-    "node-static": "^0.7.11"
+    "cypress": "^7.3.0",
+    "serve": "^11.3.2"
   }
 }
